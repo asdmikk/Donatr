@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -16,40 +17,45 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Waiting for NFC..."
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="85dp"/>
+        android:text="@string/nfc_waiting_text"
+        android:id="@+id/nfc_textview"
+        android:layout_gravity="center"/>
 
     <Button
         android:id="@+id/nfc_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NFC"
-        android:layout_centerVertical="true" android:layout_centerHorizontal="true"/>
+        android:layout_gravity="center"
+        android:onClick="mockNfc"/>
 
-    <Button
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:id="@+id/amount_button1"
-        android:layout_alignTop="@+id/amount_button2"
-        android:layout_toLeftOf="@+id/textView"
-        android:layout_toStartOf="@+id/textView"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
 
-    <Button
-        android:id="@+id/amount_button3"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignTop="@+id/amount_button2"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView"/>
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/amount_button1"
+            android:text="2‎€"
+            android:onClick="donate"/>
 
-    <Button
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="50dp"
-        android:id="@+id/amount_button2"
-        android:layout_below="@+id/nfc_button"
-        android:layout_centerHorizontal="true"/>
-</RelativeLayout>
+        <Button
+            android:id="@+id/amount_button3"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:text="5‎€"
+            android:onClick="donate"/>
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/amount_button2"
+            android:text="10€"
+            android:onClick="donate"/>
+
+    </LinearLayout>
+
+</LinearLayout>
