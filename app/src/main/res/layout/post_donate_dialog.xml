@@ -25,13 +25,15 @@
         android:id="@+id/charity_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mikk tänab."/>
+        android:text="Mikk tänab."
+        android:textColor="@color/textColorInv"/>
 
     <TextView
         android:id="@+id/amount_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/aitah_annetus"/>
+        android:text="@string/aitah_annetus"
+        android:textColor="@color/textColorInv"/>
 
     <FrameLayout
         android:layout_width="300dp"

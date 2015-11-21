@@ -6,4 +6,5 @@
     <color name="colorPrimaryDarkest">#2a6e0e</color>
     <color name="colorAccent">#FF4081</color>
     <color name="textColor">#eaeaea</color>
+    <color name="textColorInv">#303030</color>
 </resources>
