@@ -4,4 +4,5 @@
     <string name="nfc_waiting_text">Waiting for NFC...</string>
     <string name="mock_charity">Toidupank</string>
     <string name="aitah_annetus">Aitäh, et annetasid!</string>
+    <string name="title_activity_first">FirstActivity</string>
 </resources>
