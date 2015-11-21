@@ -50,11 +50,12 @@
 
         <HorizontalScrollView
                 android:id="@+id/scrollView"
-            android:layout_width="196dp"
-            android:layout_height="80dp"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
                 android:layout_gravity="center_horizontal">
 
                 <LinearLayout
+                    android:id="@+id/scrollContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -135,7 +136,10 @@
             android:layout_marginRight="8dp"
             android:id="@+id/cancel_button"
             android:text="Cancel"
-            android:onClick="cancelSelected"/>
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-light"
+            android:onClick="cancelSelected"
+            android:background="@android:color/transparent"/>
 
         <Button
             android:layout_width="96dp"
@@ -144,15 +148,20 @@
             android:layout_marginRight="8dp"
             android:id="@+id/confirm_button"
             android:text="Confirm"
+            android:textSize="20sp"
+            android:background="@android:color/transparent"
             android:onClick="donate"/>
 
-        <Button
-            android:layout_width="96dp"
-            android:layout_height="64dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:id="@+id/more_button"
-            android:text="More"/>
+        <!--<Button-->
+            <!--android:layout_width="96dp"-->
+            <!--android:layout_height="64dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:id="@+id/more_button"-->
+            <!--android:text="More"-->
+            <!--android:textSize="20sp"-->
+            <!--android:fontFamily="sans-serif-light"-->
+            <!--android:background="@android:color/transparent"/>-->
 
     </LinearLayout>
 

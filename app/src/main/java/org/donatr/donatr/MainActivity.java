@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
@@ -17,7 +16,10 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,14 +37,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     TextView nfcTextview;
-    Button amountButton1;
-    Button amountButton2;
-    Button amountButton3;
     Button confirmButton;
     Button cancelButton;
     Button moreButton;
     ImageButton logo;
     List<Button> donationButtons;
+
+    HorizontalScrollView scrollView;
 
     View selected;
 
@@ -54,21 +55,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         nfcTextview = (TextView) findViewById(R.id.nfc_textview);
-        amountButton1 = (Button) findViewById(R.id.amount_button1);
-        amountButton2 = (Button) findViewById(R.id.amount_button2);
-        amountButton3 = (Button) findViewById(R.id.amount_button3);
         confirmButton = (Button) findViewById(R.id.confirm_button);
         cancelButton = (Button) findViewById(R.id.cancel_button);
-        moreButton = (Button) findViewById(R.id.more_button);
+//        moreButton = (Button) findViewById(R.id.more_button);
         logo = (ImageButton) findViewById(R.id.imageButton);
-        donationButtons.add(amountButton1);
-        donationButtons.add(amountButton2);
-        donationButtons.add(amountButton3);
-        resetDonationButtonsOpacity();
+        scrollView = (HorizontalScrollView  ) findViewById(R.id.scrollView);
 
-        amountButton1.setVisibility(View.INVISIBLE);
-        amountButton2.setVisibility(View.INVISIBLE);
-        amountButton3.setVisibility(View.INVISIBLE);
+        resetDonationButtonsOpacity();
+        scrollView.setVisibility(View.INVISIBLE);
+//        setButtonsVisibility(View.INVISIBLE);
+
         cancelButton.setVisibility(View.INVISIBLE);
         confirmButton.setVisibility(View.INVISIBLE);
 
@@ -89,9 +85,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void selectAmount(View v) {
+        boolean shouldFade = selected == null;
         setSelected(v);
-        viewFadeIn(cancelButton, 500);
-        viewFadeIn(confirmButton, 500);
+        if(shouldFade) {
+            viewFadeIn(cancelButton, 500);
+            viewFadeIn(confirmButton, 500);
+        }
     }
 
     public void setSelected(View v) {
@@ -127,9 +126,7 @@ public class MainActivity extends AppCompatActivity {
                 new Runnable() {
                     public void run() {
                         nfcTextview.setText(getString(R.string.mock_charity));
-                        viewFadeIn(amountButton1, ONE_SECOND);
-                        viewFadeIn(amountButton2, ONE_SECOND);
-                        viewFadeIn(amountButton3, ONE_SECOND);
+                        viewFadeIn(scrollView, ONE_SECOND);
                         viewFadeOut(logo, ONE_SECOND);
                         logo.setImageDrawable(getResources().getDrawable(R.drawable.tp_ig_pv));
                         viewFadeIn(logo, ONE_SECOND);
@@ -156,9 +153,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void reset() {
-        viewFadeOut(amountButton1, LESS_SECONDS);
-        viewFadeOut(amountButton2, LESS_SECONDS);
-        viewFadeOut(amountButton3, LESS_SECONDS);
+        viewFadeOut(scrollView, LESS_SECONDS);
         viewFadeOut(cancelButton, LESS_SECONDS);
         viewFadeOut(confirmButton, LESS_SECONDS);
         resetDonationButtonsOpacity();
@@ -175,8 +170,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void resetDonationButtonsOpacity() {
-        for(Button button : donationButtons){
+        LinearLayout container = (LinearLayout) scrollView.getChildAt(0);
+        for(int i = 0; i < container.getChildCount(); i++) {
+            View button = container.getChildAt(i);
             button.setAlpha(LEAST_ALPHA);
+        }
+    }
+
+    private void setButtonsVisibility(int mode) {
+        for(int i = 0; i < scrollView.getChildCount(); i++) {
+            View button = scrollView.getChildAt(i);
+            button.setVisibility(mode);
         }
     }
 
