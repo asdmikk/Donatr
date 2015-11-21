@@ -1,50 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:gravity="center_horizontal">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="16dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/close_button"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_close_black_36dp"
-        android:background="@android:color/transparent"
-        android:layout_gravity="right"/>
+        android:gravity="top|end">
+
+        <ImageButton
+            android:id="@+id/close_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_close_black_36dp" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/charity_logo_imageview"
         android:layout_width="229dp"
         android:layout_height="229dp"
-        android:src="@drawable/tp_ig_pv"
+        android:layout_margin="10dp"
         android:elevation="5dp"
-        android:layout_margin="10dp"/>
+        android:src="@drawable/tp_ig_pv" />
 
     <TextView
         android:id="@+id/charity_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mikk tänab."
-        android:textColor="@color/textColorInv"/>
+        android:textColor="@color/textColorInv" />
 
     <TextView
         android:id="@+id/amount_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/aitah_annetus"
-        android:textColor="@color/textColorInv"/>
+        android:textColor="@color/textColorInv" />
 
     <FrameLayout
         android:layout_width="300dp"
         android:layout_height="15dp"
-        android:background="@drawable/progress_bar_shape"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:background="@drawable/progress_bar_shape">
 
         <View
             android:layout_width="140dp"
             android:layout_height="15dp"
-            android:background="@drawable/progress_bar_green_shape"/>
+            android:background="@drawable/progress_bar_green_shape" />
 
     </FrameLayout>
 
@@ -52,6 +59,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="45%"
-        android:textColor="@color/textColorInv"/>
+        android:textColor="@color/textColorInv" />
 
 </LinearLayout>

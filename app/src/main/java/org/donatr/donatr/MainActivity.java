@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     Button amountButton2;
     Button amountButton3;
     Button confirmButton;
+    Button cancelButton;
+    Button moreButton;
     ImageButton logo;
     List<Button> donationButtons;
 
@@ -56,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         amountButton2 = (Button) findViewById(R.id.amount_button2);
         amountButton3 = (Button) findViewById(R.id.amount_button3);
         confirmButton = (Button) findViewById(R.id.confirm_button);
+        cancelButton = (Button) findViewById(R.id.cancel_button);
+        moreButton = (Button) findViewById(R.id.more_button);
         logo = (ImageButton) findViewById(R.id.imageButton);
         donationButtons.add(amountButton1);
         donationButtons.add(amountButton2);
@@ -65,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
         amountButton1.setVisibility(View.INVISIBLE);
         amountButton2.setVisibility(View.INVISIBLE);
         amountButton3.setVisibility(View.INVISIBLE);
-        confirmButton.setVisibility(View.GONE);
+        cancelButton.setVisibility(View.INVISIBLE);
+        confirmButton.setVisibility(View.INVISIBLE);
 
     }
 
@@ -85,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void selectAmount(View v) {
         setSelected(v);
+        viewFadeIn(cancelButton, 500);
         viewFadeIn(confirmButton, 500);
     }
 
@@ -97,7 +103,8 @@ public class MainActivity extends AppCompatActivity {
     public void cancelSelected(View v) {
         selected = null;
         resetDonationButtonsOpacity();
-        confirmButton.setVisibility(View.GONE);
+        viewFadeOut(cancelButton, LESS_SECONDS);
+        viewFadeOut(confirmButton, LESS_SECONDS);
     }
 
     public void viewFadeIn(View v, int time) {
@@ -152,7 +159,8 @@ public class MainActivity extends AppCompatActivity {
         viewFadeOut(amountButton1, LESS_SECONDS);
         viewFadeOut(amountButton2, LESS_SECONDS);
         viewFadeOut(amountButton3, LESS_SECONDS);
-        confirmButton.setVisibility(View.GONE);
+        viewFadeOut(cancelButton, LESS_SECONDS);
+        viewFadeOut(confirmButton, LESS_SECONDS);
         resetDonationButtonsOpacity();
         resetLogo();
         selected = null;
