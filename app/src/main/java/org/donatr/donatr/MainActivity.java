@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     Button amountButton2;
     Button amountButton3;
     Button confirmButton;
+    ImageButton logo;
     List<Button> donationButtons;
 
     View selected;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         amountButton2 = (Button) findViewById(R.id.amount_button2);
         amountButton3 = (Button) findViewById(R.id.amount_button3);
         confirmButton = (Button) findViewById(R.id.confirm_button);
+        logo = (ImageButton) findViewById(R.id.imageButton);
         donationButtons.add(amountButton1);
         donationButtons.add(amountButton2);
         donationButtons.add(amountButton3);
@@ -121,6 +123,9 @@ public class MainActivity extends AppCompatActivity {
                         viewFadeIn(amountButton1, ONE_SECOND);
                         viewFadeIn(amountButton2, ONE_SECOND);
                         viewFadeIn(amountButton3, ONE_SECOND);
+                        viewFadeOut(logo, ONE_SECOND);
+                        logo.setImageDrawable(getResources().getDrawable(R.drawable.tp_ig_pv));
+                        viewFadeIn(logo, ONE_SECOND);
                     }
                 },
                 1000);
@@ -149,9 +154,16 @@ public class MainActivity extends AppCompatActivity {
         viewFadeOut(amountButton3, LESS_SECONDS);
         confirmButton.setVisibility(View.GONE);
         resetDonationButtonsOpacity();
+        resetLogo();
         selected = null;
 
         nfcTextview.setText(getString(R.string.nfc_waiting_text));
+    }
+
+    private void resetLogo() {
+        viewFadeOut(logo, LESS_SECONDS);
+        logo.setImageDrawable(getResources().getDrawable(R.drawable.nfs));
+        viewFadeIn(logo, ONE_SECOND);
     }
 
     private void resetDonationButtonsOpacity() {
