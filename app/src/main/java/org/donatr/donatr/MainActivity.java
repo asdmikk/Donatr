@@ -251,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
             ImageButton closeButton = (ImageButton) rootView.findViewById(R.id.close_button);
 
             String charity = donation.getCharity();
-            charityTextview.setText(charity + " tänab");
+            charityTextview.setText(charity + " thanks you");
             closeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
