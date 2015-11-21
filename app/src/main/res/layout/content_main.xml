@@ -14,7 +14,35 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:text="Hello World!"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="Waiting for NFC..."
+        android:id="@+id/textView" android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" android:layout_marginTop="85dp"/>
+
+    <Button
+        android:id="@+id/nfc_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NFC"
+        android:layout_centerVertical="true" android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="60dp" android:id="@+id/amount_button1" android:layout_alignTop="@+id/amount_button2"
+        android:layout_toLeftOf="@+id/textView" android:layout_toStartOf="@+id/textView"/>
+
+    <Button
+        android:id="@+id/amount_button3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignTop="@+id/amount_button2" android:layout_toRightOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView"/>
+
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="50dp"
+        android:id="@+id/amount_button2"
+        android:layout_below="@+id/nfc_button" android:layout_centerHorizontal="true"/>
 </RelativeLayout>
