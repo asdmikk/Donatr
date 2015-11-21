@@ -86,6 +86,7 @@
                 android:layout_height="wrap_content"
                 android:text="Share:"
                 android:textSize="24dp"
+                android:layout_marginLeft="8dp"
                 android:textColor="@color/textColorInv"/>
             <LinearLayout
                 android:layout_width="wrap_content"
