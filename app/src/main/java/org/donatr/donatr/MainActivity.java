@@ -8,8 +8,6 @@ import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -18,12 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.parse.ParseObject;
 
 import org.donatr.donatr.model.Donation;
 
@@ -32,6 +28,7 @@ import java.io.Serializable;
 public class MainActivity extends AppCompatActivity {
 
     private static final int ONE_SECOND = 1000;
+    private static final int LESS_SECONDS = 300;
 
     TextView nfcTextview;
     Button amountButton1;
@@ -72,14 +69,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void donate(View v) {
         String amount = ((Button)selected).getText().toString();
-        String charity = ((Button)selected).getText().toString();
+        String charity = nfcTextview.getText().toString();
         Donation donation = new Donation(charity, amount);
         showPostDialog(donation);
     }
 
     public void selectAmount(View v) {
         setSelected(v);
-        buttonFadeIn(confirmButton, 500);
+        viewFadeIn(confirmButton, 500);
     }
 
     public void setSelected(View v) {
@@ -92,11 +89,18 @@ public class MainActivity extends AppCompatActivity {
         confirmButton.setVisibility(View.INVISIBLE);
     }
 
-    public void buttonFadeIn(View v, int time) {
+    public void viewFadeIn(View v, int time) {
         AlphaAnimation anim = new AlphaAnimation(0.0f, 1.0f);
         anim.setDuration(time);
         v.startAnimation(anim);
         v.setVisibility(View.VISIBLE);
+    }
+
+    public void viewFadeOut(View v, int time) {
+        AlphaAnimation anim = new AlphaAnimation(1.0f, 0.0f);
+        anim.setDuration(time);
+        v.startAnimation(anim);
+        v.setVisibility(View.INVISIBLE);
     }
 
     public void mockNfc(View v) {
@@ -105,9 +109,9 @@ public class MainActivity extends AppCompatActivity {
                 new Runnable() {
                     public void run() {
                         nfcTextview.setText(getString(R.string.mock_charity));
-                        buttonFadeIn(amountButton1, ONE_SECOND);
-                        buttonFadeIn(amountButton2, ONE_SECOND);
-                        buttonFadeIn(amountButton3, ONE_SECOND);
+                        viewFadeIn(amountButton1, ONE_SECOND);
+                        viewFadeIn(amountButton2, ONE_SECOND);
+                        viewFadeIn(amountButton3, ONE_SECOND);
                     }
                 },
                 1000);
@@ -117,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "donating " + title, Toast.LENGTH_SHORT).show();
     }
 
-    void showPostDialog(Donation donation) {
+    private void showPostDialog(Donation donation) {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         Fragment prev = getFragmentManager().findFragmentByTag("dialog");
         if (prev != null) {
@@ -128,6 +132,17 @@ public class MainActivity extends AppCompatActivity {
         // Create and show the dialog.
         DialogFragment newFragment = PostDonationDialogFragment.newInstance(donation);
         newFragment.show(ft, "dialog");
+    }
+
+    public void reset() {
+        viewFadeOut(amountButton1, LESS_SECONDS);
+        viewFadeOut(amountButton2, LESS_SECONDS);
+        viewFadeOut(amountButton3, LESS_SECONDS);
+        viewFadeOut(confirmButton, LESS_SECONDS);
+
+        selected = null;
+
+        nfcTextview.setText(getString(R.string.nfc_waiting_text));
     }
 
     @Override
@@ -192,13 +207,26 @@ public class MainActivity extends AppCompatActivity {
 
             View rootView = inflater.inflate(R.layout.post_donate_dialog, container, false);
 
-            TextView amountTextview = (TextView) rootView.findViewById(R.id.amount_textview);
             TextView charityTextview = (TextView) rootView.findViewById(R.id.charity_textview);
+            ImageButton closeButton = (ImageButton) rootView.findViewById(R.id.close_button);
 
-            charityTextview.setText(donation.getCharity());
-            amountTextview.setText(donation.getAmount());
+            String charity = donation.getCharity();
+            charityTextview.setText(charity + " tänab");
+
+            closeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getDialog().dismiss();
+                }
+            });
 
             return rootView;
+        }
+
+        @Override
+        public void onDismiss(DialogInterface dialog) {
+            super.onDismiss(dialog);
+            ((MainActivity)getActivity()).reset();
         }
     }
 }

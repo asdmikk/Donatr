@@ -2,21 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="wrap_content"
+              android:gravity="center_horizontal">
 
     <ImageButton
+        android:id="@+id/close_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"/>
+        android:src="@drawable/ic_close_black_36dp"
+        android:background="@android:color/transparent"
+        android:layout_gravity="right"/>
+
+    <ImageView
+        android:id="@+id/charity_logo_imageview"
+        android:layout_width="229dp"
+        android:layout_height="229dp"
+        android:src="@drawable/tp_ig_pv"
+        android:elevation="5dp"
+        android:layout_margin="10dp"/>
 
     <TextView
         android:id="@+id/charity_textview"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="Mikk tänab."/>
 
     <TextView
         android:id="@+id/amount_textview"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="@string/aitah_annetus"/>
 
 </LinearLayout>
