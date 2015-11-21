@@ -33,4 +33,19 @@
         android:layout_height="wrap_content"
         android:text="@string/aitah_annetus"/>
 
+    <FrameLayout
+        android:layout_width="300dp"
+        android:layout_height="15dp"
+        android:background="@drawable/progress_bar_shape"
+        android:layout_margin="10dp">
+
+        <View
+            android:layout_width="140dp"
+            android:layout_height="15dp"
+            android:background="@drawable/progress_bar_green_shape"/>
+
+    </FrameLayout>
+
+
+
 </LinearLayout>
