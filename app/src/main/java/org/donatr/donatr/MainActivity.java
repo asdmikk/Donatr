@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -25,8 +26,6 @@ import android.widget.Toast;
 import org.donatr.donatr.model.Donation;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     Button cancelButton;
     Button moreButton;
     ImageButton logo;
-    List<Button> donationButtons;
+    private Drawable nfcLogo;
 
     HorizontalScrollView scrollView;
 
@@ -49,20 +48,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        donationButtons = new ArrayList<>();
+        nfcLogo = getResources().getDrawable(R.drawable.nfs);
         setContentView(R.layout.activity_main);
 
 
         nfcTextview = (TextView) findViewById(R.id.nfc_textview);
         confirmButton = (Button) findViewById(R.id.confirm_button);
         cancelButton = (Button) findViewById(R.id.cancel_button);
-//        moreButton = (Button) findViewById(R.id.more_button);
         logo = (ImageButton) findViewById(R.id.imageButton);
         scrollView = (HorizontalScrollView  ) findViewById(R.id.scrollView);
 
         resetDonationButtonsOpacity();
         scrollView.setVisibility(View.INVISIBLE);
-//        setButtonsVisibility(View.INVISIBLE);
 
         cancelButton.setVisibility(View.INVISIBLE);
         confirmButton.setVisibility(View.INVISIBLE);
@@ -160,19 +157,19 @@ public class MainActivity extends AppCompatActivity {
         resetDonationButtonsOpacity();
         resetLogo();
         selected = null;
-
         nfcTextview.setText(getString(R.string.nfc_waiting_text));
     }
 
     private void resetLogo() {
-        viewFadeOut(logo, LESS_SECONDS);
-        logo.setImageDrawable(getResources().getDrawable(R.drawable.nfs));
-        viewFadeIn(logo, ONE_SECOND);
+//        viewFadeOut(logo, ONE_SECOND);
+        logo.setImageDrawable(nfcLogo);
+//        viewFadeIn(logo, ONE_SECOND);
     }
 
     private void resetDonationButtonsOpacity() {
         LinearLayout container = (LinearLayout) scrollView.getChildAt(0);
-        for(int i = 0; i < container.getChildCount(); i++) {
+        int childCount = container.getChildCount();
+        for(int i = 0; i < childCount; i++) {
             View button = container.getChildAt(i);
             button.setAlpha(LEAST_ALPHA);
         }
@@ -255,28 +252,19 @@ public class MainActivity extends AppCompatActivity {
             closeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getFragmentManager().beginTransaction()
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                             .remove(getFragmentManager().findFragmentByTag("dialog"))
                             .commit();
-                    ((MainActivity)getActivity()).reset();
                 }
             });
-
-//            closeButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    getDialog().dismiss();
-//                }
-//            });
-
             return rootView;
         }
 
-//        @Override
-//        public void onDismiss(DialogInterface dialog) {
-//            super.onDismiss(dialog);
-//            ((MainActivity)getActivity()).reset();
-//        }
+        @Override
+        public void onStart() {
+            super.onStart();
+            ((MainActivity)getActivity()).reset();
+        }
     }
 }
