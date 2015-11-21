@@ -35,14 +35,15 @@
             android:layout_height="229dp"
             android:elevation="5dp"
             android:src="@drawable/tp_ig_pv"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"/>
 
         <TextView
             android:id="@+id/charity_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="Mikk tänab."
+            android:textSize="18sp"
             android:textColor="@color/textColorInv"
             android:layout_gravity="center_horizontal" />
 
@@ -51,6 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/aitah_annetus"
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp"
             android:textColor="@color/textColorInv"
             android:layout_gravity="center_horizontal" />
 
