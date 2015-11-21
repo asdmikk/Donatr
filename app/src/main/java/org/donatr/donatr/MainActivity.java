@@ -24,27 +24,30 @@ import android.widget.Toast;
 import org.donatr.donatr.model.Donation;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int ONE_SECOND = 1000;
     private static final int LESS_SECONDS = 300;
+    private static final float LEAST_ALPHA = 0.3f;
+
 
     TextView nfcTextview;
     Button amountButton1;
     Button amountButton2;
     Button amountButton3;
     Button confirmButton;
+    List<Button> donationButtons;
 
     View selected;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        donationButtons = new ArrayList<>();
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
 
         nfcTextview = (TextView) findViewById(R.id.nfc_textview);
@@ -52,11 +55,15 @@ public class MainActivity extends AppCompatActivity {
         amountButton2 = (Button) findViewById(R.id.amount_button2);
         amountButton3 = (Button) findViewById(R.id.amount_button3);
         confirmButton = (Button) findViewById(R.id.confirm_button);
+        donationButtons.add(amountButton1);
+        donationButtons.add(amountButton2);
+        donationButtons.add(amountButton3);
+        resetDonationButtonsOpacity();
 
         amountButton1.setVisibility(View.INVISIBLE);
         amountButton2.setVisibility(View.INVISIBLE);
         amountButton3.setVisibility(View.INVISIBLE);
-        confirmButton.setVisibility(View.INVISIBLE);
+        confirmButton.setVisibility(View.GONE);
 
     }
 
@@ -81,12 +88,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void setSelected(View v) {
         selected = v;
-
+        resetDonationButtonsOpacity();
+        v.setAlpha(1f);
     }
 
     public void cancelSelected(View v) {
         selected = null;
-        confirmButton.setVisibility(View.INVISIBLE);
+        resetDonationButtonsOpacity();
+        confirmButton.setVisibility(View.GONE);
     }
 
     public void viewFadeIn(View v, int time) {
@@ -138,11 +147,17 @@ public class MainActivity extends AppCompatActivity {
         viewFadeOut(amountButton1, LESS_SECONDS);
         viewFadeOut(amountButton2, LESS_SECONDS);
         viewFadeOut(amountButton3, LESS_SECONDS);
-        viewFadeOut(confirmButton, LESS_SECONDS);
-
+        confirmButton.setVisibility(View.GONE);
+        resetDonationButtonsOpacity();
         selected = null;
 
         nfcTextview.setText(getString(R.string.nfc_waiting_text));
+    }
+
+    private void resetDonationButtonsOpacity() {
+        for(Button button : donationButtons){
+            button.setAlpha(LEAST_ALPHA);
+        }
     }
 
     @Override
