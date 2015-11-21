@@ -12,11 +12,57 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_first"
     tools:context="org.donatr.donatr.FirstActivity"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:background="@drawable/background_gradient"
+    android:orientation="vertical">
 
     <ImageView
-        android:layout_width="300dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/donatr"/>
+        android:src="@drawable/dtrlogo"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/slogan"
+        android:textSize="26sp"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_with"
+        android:layout_marginBottom="10dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/fbp"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:onClick="login"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/twp"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:onClick="login"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/gp"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:onClick="login"/>
+
+    </LinearLayout>
 
 </LinearLayout>

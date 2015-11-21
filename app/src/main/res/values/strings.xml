@@ -5,4 +5,7 @@
     <string name="mock_charity">Toidupank</string>
     <string name="aitah_annetus">Aitäh, et annetasid!</string>
     <string name="title_activity_first">FirstActivity</string>
+    <string name="slogan">Making giving easier</string>
+    <string name="login_with">Log in with</string>
+    <string name="title_activity_user_setup">UserSetupActivity</string>
 </resources>
