@@ -1,64 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:layout_margin="16dp"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
-
+<FrameLayout
+    android:background="@color/textColor"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_marginTop="32dp"
+    android:layout_marginBottom="32dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:elevation="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="top|end">
+        android:orientation="vertical"
+        android:layout_margin="16dp">
 
-        <ImageButton
-            android:id="@+id/close_button"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:gravity="top|end">
+
+            <ImageButton
+                android:id="@+id/close_button"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_close_black_36dp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/charity_logo_imageview"
+            android:layout_width="229dp"
+            android:layout_height="229dp"
+            android:elevation="5dp"
+            android:src="@drawable/tp_ig_pv"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/charity_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_close_black_36dp" />
-    </LinearLayout>
+            android:layout_marginTop="8dp"
+            android:text="Mikk tänab."
+            android:textColor="@color/textColorInv"
+            android:layout_gravity="center_horizontal" />
 
-    <ImageView
-        android:id="@+id/charity_logo_imageview"
-        android:layout_width="229dp"
-        android:layout_height="229dp"
-        android:layout_margin="10dp"
-        android:elevation="5dp"
-        android:src="@drawable/tp_ig_pv" />
+        <TextView
+            android:id="@+id/amount_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/aitah_annetus"
+            android:textColor="@color/textColorInv"
+            android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:id="@+id/charity_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mikk tänab."
-        android:textColor="@color/textColorInv" />
-
-    <TextView
-        android:id="@+id/amount_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/aitah_annetus"
-        android:textColor="@color/textColorInv" />
-
-    <FrameLayout
-        android:layout_width="300dp"
-        android:layout_height="15dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/progress_bar_shape">
-
-        <View
-            android:layout_width="140dp"
+        <FrameLayout
+            android:layout_width="300dp"
             android:layout_height="15dp"
-            android:background="@drawable/progress_bar_green_shape" />
+            android:layout_margin="10dp"
+            android:background="@drawable/progress_bar_shape"
+            android:layout_gravity="center_horizontal">
 
-    </FrameLayout>
+            <View
+                android:layout_width="140dp"
+                android:layout_height="15dp"
+                android:background="@drawable/progress_bar_green_shape" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="45%"
-        android:textColor="@color/textColorInv" />
+        </FrameLayout>
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="45%"
+            android:textColor="@color/textColorInv"
+            android:layout_gravity="center_horizontal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_gravity="bottom">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Share:"
+                android:textSize="24dp"
+                android:textColor="@color/textColorInv"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/fb"/>
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/tw"/>
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/g"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>
+

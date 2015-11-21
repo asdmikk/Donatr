@@ -10,16 +10,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -148,8 +147,10 @@ public class MainActivity extends AppCompatActivity {
         ft.addToBackStack(null);
 
         // Create and show the dialog.
-        DialogFragment newFragment = PostDonationDialogFragment.newInstance(donation);
-        newFragment.show(ft, "dialog");
+        Fragment newFragment = PostDonationDialogFragment.newInstance(donation);
+        getFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .add(android.R.id.content, newFragment, "dialog").commit();
+//        newFragment.show(ft, "dialog");
     }
 
     public void reset() {
@@ -227,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static class PostDonationDialogFragment extends DialogFragment {
+    public static class PostDonationDialogFragment extends Fragment {
 
         public static PostDonationDialogFragment newInstance(Serializable donation) {
             PostDonationDialogFragment frag = new PostDonationDialogFragment();
@@ -244,28 +245,38 @@ public class MainActivity extends AppCompatActivity {
 
             Donation donation = (Donation) getArguments().getSerializable("donation");
 
-            View rootView = inflater.inflate(R.layout.post_donate_dialog, container, false);
+            final View rootView = inflater.inflate(R.layout.post_donate_dialog, container, false);
 
             TextView charityTextview = (TextView) rootView.findViewById(R.id.charity_textview);
             ImageButton closeButton = (ImageButton) rootView.findViewById(R.id.close_button);
 
             String charity = donation.getCharity();
             charityTextview.setText(charity + " tänab");
-
             closeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getDialog().dismiss();
+                    getFragmentManager().beginTransaction()
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .remove(getFragmentManager().findFragmentByTag("dialog"))
+                            .commit();
+                    ((MainActivity)getActivity()).reset();
                 }
             });
+
+//            closeButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    getDialog().dismiss();
+//                }
+//            });
 
             return rootView;
         }
 
-        @Override
-        public void onDismiss(DialogInterface dialog) {
-            super.onDismiss(dialog);
-            ((MainActivity)getActivity()).reset();
-        }
+//        @Override
+//        public void onDismiss(DialogInterface dialog) {
+//            super.onDismiss(dialog);
+//            ((MainActivity)getActivity()).reset();
+//        }
     }
 }
